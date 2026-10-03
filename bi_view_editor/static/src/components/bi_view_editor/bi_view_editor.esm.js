@@ -55,7 +55,7 @@ export class BiViewEditor extends Component {
         field.column = typeof field.column === "undefined" ? false : field.column;
         field.measure = typeof field.measure === "undefined" ? false : field.measure;
         field.list = typeof field.list === "undefined" ? true : field.list;
-        field._id = typeof field._id === "undefined" ? _.uniqueId("node_") : field._id;
+        field._id = typeof field._id === "undefined" ? ("node_" + Date.now() + "_" + Math.floor(Math.random() * 10000)) : field._id;
         if (field.join_node) {
             field.join_left =
                 typeof field.join_left === "undefined" ? false : field.join_left;
@@ -213,5 +213,9 @@ BiViewEditor.components = {
 BiViewEditor.props = {
     ...standardFieldProps,
 };
+export const biViewEditor = {
+    component: BiViewEditor,
+    supportedTypes: ["char"],
+};
 
-registry.category("fields").add("BVEEditor", BiViewEditor);
+registry.category("fields").add("BVEEditor", biViewEditor);

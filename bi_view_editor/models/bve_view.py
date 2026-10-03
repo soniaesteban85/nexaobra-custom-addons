@@ -117,8 +117,6 @@ class BveView(models.Model):
     )
     query = fields.Text(compute="_compute_sql_query")
     over_condition = fields.Text(
-        states={"draft": [("readonly", False)]},
-        readonly=True,
         help="Condition to be inserted in the OVER part "
         "of the ID's row_number function.\n"
         "For instance, 'ORDER BY t1.id' would create "
