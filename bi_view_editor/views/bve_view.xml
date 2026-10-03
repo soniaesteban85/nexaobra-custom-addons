@@ -14,16 +14,10 @@
     <!-- Menus -->
     <menuitem
         id="menu_bi_view_editor_custom_reports"
-        name="Custom BI Views"
-        parent="base.reporting_menuitem"
-        sequence="50"
-    />
-    <menuitem
-        id="menu_bi_view_editor_view"
-        name="BI Views Definition"
-        parent="menu_bi_view_editor_custom_reports"
+        name="Custom BI Views (Editor de Vistas)"
+        parent="base.menu_custom"
         action="action_bi_view_editor_view_form"
-        sequence="10"
+        sequence="70"
     />
 
     <record id="view_bi_view_editor_view_tree" model="ir.ui.view">
