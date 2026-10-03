@@ -4,7 +4,18 @@
 import base64
 import json
 
-import pydot
+try:
+    import pydot
+except ImportError:
+    try:
+        import sys, os
+        for p in [os.path.expanduser('~/.local/lib/python3.12/site-packages'), os.path.expanduser('~/.local/lib/python3.11/site-packages')]:
+            if os.path.exists(p) and p not in sys.path:
+                sys.path.append(p)
+        import pydot
+    except ImportError:
+        pydot = None
+
 from psycopg2.extensions import AsIs
 
 from odoo import _, api, fields, models, tools
