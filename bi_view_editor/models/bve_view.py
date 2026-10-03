@@ -26,11 +26,17 @@ class BveView(models.Model):
     _name = "bve.view"
     _description = "BI View Editor"
 
-    @api.depends("group_ids", "group_ids.users")
+    @api.depends("group_ids")
     def _compute_users(self):
         for bve_view in self.sudo():
             if bve_view.group_ids:
-                bve_view.user_ids = bve_view.group_ids.mapped("users")
+                users = self.env["res.users"]
+                for group in bve_view.group_ids:
+                    if hasattr(group, 'user_ids'):
+                        users |= group.user_ids
+                    elif hasattr(group, 'users'):
+                        users |= group.users
+                bve_view.user_ids = users
             else:
                 bve_view.user_ids = self.env["res.users"].sudo().search([])
 
